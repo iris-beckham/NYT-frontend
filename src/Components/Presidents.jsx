@@ -1,21 +1,39 @@
 import { useEffect, useState } from "react";
 const URL = import.meta.env.VITE_BASE_URL;
 
-const Presidents = ({ searchInputs }) => {
+const Presidents = ({ searchInputs, loading, setLoading }) => {
   const [presidents, setPresidents] = useState([]);
+
+
   useEffect(() => {
     fetch(`${URL}/api/presidents`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-
         setPresidents(data);
       });
   }, []);
 
+  const findPres = (presArr, year) => {
+    if(presArr && year) {
+      const modArr = presArr.filter(p => p.term_start.split('-')[0] && year < p.term_end.split('-')[0])
+      if(modArr[0]) {
+         return (
+          <>
+          <h2>{modArr[0].pres_name}</h2>
+          {/* <img src={modArr[0].image} alt={modArr[0].pres_name} /> */}
+          </>
+        )
+        }
+    }
+    
+  }
+
   return (
     <div className="bg-purple-300">
-      <div>Presidents</div>
+      <div>
+        <h2>President</h2>
+        {findPres(presidents, searchInputs.year)}
+      </div>
     </div>
   );
 };

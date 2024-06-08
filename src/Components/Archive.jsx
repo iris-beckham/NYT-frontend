@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { formatDate } from "../Helpers/helpers";
-import Presidents from "./Presidents";
 
-const Archive = ({ searchInputs }) => {
+const Archive = ({ searchInputs, loading, setLoading }) => {
   const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
+  
   const [error, setError] = useState(null);
 
-  const formattedDate = `${searchInputs.year}/${searchInputs.month + 1}`;
+  // const formattedDate = `${searchInputs.year}/${searchInputs.month + 1}`;
   useEffect(() => {
     const fetchData = async () => {
       const apiKey = "dakGsl89dvWtp72TvxtYL3CE527gCybo"; // Replace with your actual API key
-      const url = `https://api.nytimes.com/svc/archive/v1/${formattedDate}.json?api-key=${apiKey}`;
+      const url = `https://api.nytimes.com/svc/archive/v1/${searchInputs.year}/${searchInputs.month}.json?api-key=${apiKey}`;
 
       try {
+        setLoading(true); // Set loading state to true before fetching data
         const response = await fetch(url);
         if (!response.ok) {
           throw new Error(`Error: ${response.status}`);
@@ -23,41 +22,38 @@ const Archive = ({ searchInputs }) => {
       } catch (err) {
         setError(err.message);
       } finally {
-        setLoading(false);
+        setLoading(false); // Set loading state to false after fetching data
       }
     };
 
     fetchData();
-  }, []);
+  }, [searchInputs]);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
 
   const articleArray = data.response.docs.slice(0, 6);
 
-  let index = 4;
   return (
-    <div>
-      <h1 className="bg-yellow-500">New York Times Archive</h1>
+    <div className="bg-yellow-500">
+      <h1>New York Times Archive</h1>
 
       <ul>
         {articleArray.map((article, index) => (
-          <li key="index">
+          <li key={index}>
             <h3>Header: {article.headline.main}</h3>
 
-            {article.multimedia[index] ? (
+            {article.multimedia.length > 0 ? (
               <img
-                src={`https://nytimes.com/${article.multimedia[index].url}`}
+                src={`https://nytimes.com/${article.multimedia[article.multimedia.length - 1].url}`}
                 alt="article-image"
               />
             ) : (
-              <p>Snippet {article.snippet} </p>
+              <p>Snippet: {article.snippet ? article.snippet.substring(0, 100) + '...' : article.abstract.substring(0, 100) + '...' } </p>
             )}
           </li>
         ))}
       </ul>
-
-      <Presidents searchInputs={searchInputs} />
     </div>
   );
 };

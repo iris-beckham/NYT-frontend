@@ -4,17 +4,19 @@ import LandingPage from "./Components/LandingPage";
 // import Results from "./Pages/Results";
 
 import AboutTheDevs from "./Components/AboutTheDevs";
+import NavBar from "./Components/NavBar";
+import Footer from "./Components/Footer";
 const App = () => {
 
   return (
     <div>
-      <h1>Welcome</h1>
-
+      <NavBar />
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/about-us" element={<AboutTheDevs />} />
         {/* <Route path="/results" element={<Results />} /> */}
       </Routes>
+      <Footer />
     </div>
   );
 
