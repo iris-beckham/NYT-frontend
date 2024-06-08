@@ -5,6 +5,7 @@ import LandingPage from "./Components/LandingPage";
 
 import AboutTheDevs from "./Components/AboutTheDevs";
 const App = () => {
+
   return (
     <div>
       <h1>Welcome</h1>
@@ -16,6 +17,7 @@ const App = () => {
       </Routes>
     </div>
   );
+
 };
 
 export default App;
