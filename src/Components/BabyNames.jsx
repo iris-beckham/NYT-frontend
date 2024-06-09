@@ -20,6 +20,8 @@ const BabyNames = ({ searchInputs, loading, setLoading }) => {
   }, [searchInputs]);
 
   // console.log(babyNames)
+
+  if(loading) return null;
   return (
     <div className="bg-cyan-300">
       {babyNames.length > 0 ? (
