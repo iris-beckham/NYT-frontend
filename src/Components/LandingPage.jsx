@@ -16,7 +16,7 @@ const LandingPage = () => {
   });
   const [loading, setLoading] = useState(true);
   return (
-    <div>
+    <div className="mt-14">
       <div className="bg-red-400">
         <Forms searchInputs={searchInputs} setSearchInputs={setSearchInputs} />
         <div>
