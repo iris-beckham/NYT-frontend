@@ -1,26 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { convertTempToF } from "../Helpers/helpers";
+const keysArray = import.meta.env.VITE_WEATHER.split(" ");
+let keyIndex = 0;
 
-const API_KEY = import.meta.env.VITE_REACT_APP_WEATHER_API_KEY_MAIN
-
-const Weather = ({searchInputs}) => {
+const Weather = ({ searchInputs }) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   // const [date, setDate] = useState("");
   const date = `${searchInputs.year}-${String(searchInputs.month).padStart(2, '0')}-${String(searchInputs.day).padStart(2, '0')}`;
   // Get today's date in YYYY-MM-DD format
-  
+
 
   useEffect(() => {
     if (!date) return;
 
-    const fetchData = async () => {
+    const fetchData = async (key) => {
       setLoading(true);
-      const url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/new%20york/${date}/${date}?unitGroup=metric&key=${API_KEY}&contentType=json`;
+      let url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/new%20york/${date}/${date}?unitGroup=metric&key=${key}&contentType=json`;
 
       try {
         const response = await fetch(url);
+        if (response.status === 429) {
+          keyIndex = keyIndex === keysArray.length - 1 ? 0 : keyIndex + 1;
+          fetchData(keysArray[1]);
+        }
         if (!response.ok) {
           throw new Error(`Error: ${response.status}`);
         }
@@ -32,13 +36,9 @@ const Weather = ({searchInputs}) => {
         setLoading(false);
       }
     };
-
-    fetchData();
+    fetchData(keysArray[0]);
   }, [date]);
 
-  // const handleDateChange = (e) => {
-  //   // setDate(e.target.value);
-  // };
 
   const getWeatherIcon = (condition) => {
     switch (condition.toLowerCase()) {
