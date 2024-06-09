@@ -28,6 +28,8 @@ const Presidents = ({ searchInputs, loading, setLoading }) => {
     
   }
 
+  if(loading) return null;
+
   return (
     <div className="bg-purple-300">
       <div>

@@ -60,6 +60,7 @@ const Weather = ({searchInputs}) => {
   };
 
   // const maxDate = getCurrentDate();
+  if(loading) return null;
 
   return (
     <div>
