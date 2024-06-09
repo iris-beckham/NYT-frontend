@@ -91,7 +91,7 @@ body {
 }
 .names {
   display: flex;
-  gap: 40px;
+  gap: 3%;
   margin-top: 65px;
 }
 .boy {
