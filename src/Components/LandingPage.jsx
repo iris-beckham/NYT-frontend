@@ -11,31 +11,30 @@ const LandingPage = ({ searchInputs }) => {
   const [loading, setLoading] = useState(true);
   return (
     <div className="mt-24">
-      <div className="bg-red-400">
-
         <div>
           <Archive
             searchInputs={searchInputs}
             loading={loading}
             setLoading={setLoading}
           />
+          <div className="widget-container">
           <Presidents
             searchInputs={searchInputs}
             loading={loading}
             setLoading={setLoading}
-          />
+            />
           <BabyNames
             searchInputs={searchInputs}
             loading={loading}
             setLoading={setLoading}
-          />
+            />
           <Weather searchInputs={searchInputs} />
+            </div>
           <div className="bg-slate-100">
             <MilkPricesChart />
             <MTAPrices />
           </div>
         </div>
-      </div>
     </div>
   );
 };

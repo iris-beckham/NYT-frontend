@@ -19,8 +19,8 @@ const Presidents = ({ searchInputs, loading, setLoading }) => {
       if(modArr[0]) {
          return (
           <>
-          <h2>{modArr[0].pres_name}</h2>
           <img src={modArr[0].image} alt={modArr[0].pres_name} />
+          <h2>{modArr[0].pres_name}</h2>
           </>
         )
         }
@@ -31,9 +31,9 @@ const Presidents = ({ searchInputs, loading, setLoading }) => {
   if(loading) return null;
 
   return (
-    <div className="bg-purple-300">
+    <div className="pres-container dm-serif-text-regular">
       <div>
-        <h2>President</h2>
+        <h1>President</h1>
         {findPres(presidents, searchInputs.year)}
       </div>
     </div>
