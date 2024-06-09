@@ -10,7 +10,11 @@ const LandingPage = ({ searchInputs }) => {
 
   const [loading, setLoading] = useState(true);
   return (
+
+   
+
     <div className="mt-24">
+
         <div>
           <Archive
             searchInputs={searchInputs}
@@ -39,6 +43,7 @@ const LandingPage = ({ searchInputs }) => {
         </div>
         </div>
     </div>
+ </div>
   );
 };
 

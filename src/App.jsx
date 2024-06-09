@@ -7,6 +7,7 @@ import AboutTheDevs from "./Components/AboutTheDevs";
 import NavBar from "./Components/NavBar";
 import Footer from "./Components/Footer";
 const App = () => {
+
   const date = new Date();
 
   const [searchInputs, setSearchInputs] = useState({
@@ -25,7 +26,6 @@ const App = () => {
       <Footer />
     </div>
   );
-
 };
 
 export default App;

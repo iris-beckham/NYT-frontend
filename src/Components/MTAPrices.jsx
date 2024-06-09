@@ -23,7 +23,7 @@ ChartJS.register(
 
 const generateGrayscaleColors = (numColors) => {
   const colors = [];
-  const step = 255 / (numColors - 1); // Calculate the step for each color in grayscale
+  const step = 255 / (numColors - 1);
   for (let i = 0; i < numColors; i++) {
     const value = Math.round(step * i);
     colors.push(`rgb(${value}, ${value}, ${value})`);
@@ -31,47 +31,47 @@ const generateGrayscaleColors = (numColors) => {
   return colors;
 };
 
-const grayscaleColors = generateGrayscaleColors(3); // Generate 3 grayscale colors
+const grayscaleColors = generateGrayscaleColors(3);
 
 const TrainChart = () => {
   const [chartData, setChartData] = useState({
-    labels: ["1970", "1980", "1990", "2000", "2010", "2020"], // x axis
+    labels: ["1970", "1980", "1990", "2000", "2010", "2020"],
     datasets: [
       {
         label: "MTA Train and Bus Fare (in dollars)",
-        data: [0.3, 0.6, 1.15, 1.5, 2.25, 2.9], // y axis
-        backgroundColor: "rgba(0, 0, 0, 0)", // No fill for the line area
+        data: [0.3, 0.6, 1.15, 1.5, 2.25, 2.9],
+        backgroundColor: "rgba(0, 0, 0, 0)",
         borderColor: grayscaleColors[0],
         borderWidth: 2,
         pointBackgroundColor: grayscaleColors[0],
         pointBorderColor: grayscaleColors[0],
         pointRadius: 5,
         pointHoverRadius: 7,
-        fill: false, // Don't fill the area under the line
+        fill: false,
       },
       {
         label: "NYC Ferry Price (in dollars)",
-        data: [0.25, 0.5, 0.75, 1, 1.35, 4.0], // y axis
-        backgroundColor: "rgba(0, 0, 0, 0)", // No fill for the line area
+        data: [0.25, 0.5, 0.75, 1, 1.35, 4.0],
+        backgroundColor: "rgba(0, 0, 0, 0)",
         borderColor: grayscaleColors[1],
         borderWidth: 2,
         pointBackgroundColor: grayscaleColors[1],
         pointBorderColor: grayscaleColors[1],
         pointRadius: 5,
         pointHoverRadius: 7,
-        fill: false, // Don't fill the area under the line
+        fill: false,
       },
       {
         label: "Gas Price (in dollars)",
-        data: [0.36, 1.19, 1.16, 1.56, 2.84, 2.24], // y axis
-        backgroundColor: "rgba(0, 0, 0, 0)", // No fill for the line area
+        data: [0.36, 1.19, 1.16, 1.56, 2.84, 2.24],
+        backgroundColor: "rgba(0, 0, 0, 0)",
         borderColor: grayscaleColors[2],
-        borderWidth: 2,
+        borderWidth: 3,
         pointBackgroundColor: grayscaleColors[2],
         pointBorderColor: grayscaleColors[2],
         pointRadius: 5,
         pointHoverRadius: 7,
-        fill: false, // Don't fill the area under the line
+        fill: false,
       },
     ],
   });
@@ -88,24 +88,39 @@ const TrainChart = () => {
       },
     },
     scales: {
+      x: {
+        title: {
+          display: true,
+          text: "Year",
+          color: "gray",
+          font: {
+            weight: "bold",
+            size: "12px",
+          },
+        },
+      },
       y: {
         beginAtZero: true,
         title: {
           display: true,
-          text: "Fare (in dollars)",
+          text: "Price (in dollars)",
+          color: "gray",
+          font: {
+            weight: "bold",
+            size: "12px",
+          },
         },
       },
     },
     animation: {
-      duration: 2000, // duration of the animation in milliseconds
-      easing: "easeInOutQuad", // easing function for the animation
+      duration: 2000,
+      easing: "easeInOutQuad",
     },
   };
 
   return (
     <div>
-      {/* <div>MTA Fare Price Chart</div> */}
-      <div style={{ height: "400px", width: "600px" }}>
+      <div style={{ height: "500px", width: "500px" }}>
         <Line data={chartData} options={options} />
       </div>
     </div>
