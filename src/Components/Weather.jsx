@@ -23,7 +23,7 @@ const Weather = ({ searchInputs }) => {
         const response = await fetch(url);
         if (response.status === 429) {
           keyIndex = keyIndex === keysArray.length - 1 ? 0 : keyIndex + 1;
-          fetchData(keysArray[1]);
+          fetchData(keysArray[keyIndex]);
         }
         if (!response.ok) {
           throw new Error(`Error: ${response.status}`);
