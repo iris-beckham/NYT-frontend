@@ -1,26 +1,23 @@
 import React, { useEffect, useState } from "react";
+import { convertTempToF } from "../Helpers/helpers";
 
-const Weather = () => {
+const API_KEY = import.meta.env.VITE_REACT_APP_WEATHER_API_KEY_MAIN
+
+const Weather = ({searchInputs}) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [date, setDate] = useState("");
-
+  // const [date, setDate] = useState("");
+  const date = `${searchInputs.year}-${String(searchInputs.month).padStart(2, '0')}-${String(searchInputs.day).padStart(2, '0')}`;
   // Get today's date in YYYY-MM-DD format
-  const getCurrentDate = () => {
-    const today = new Date();
-    const year = today.getFullYear();
-    const month = String(today.getMonth() + 1).padStart(2, "0");
-    const day = String(today.getDate()).padStart(2, "0");
-    return `${year}-${month}-${day}`;
-  };
+  
 
   useEffect(() => {
     if (!date) return;
 
     const fetchData = async () => {
       setLoading(true);
-      const url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/new%20york/${date}/${date}?unitGroup=metric&key=GH4YX7EG5W558XW4VAGE8B6UN&contentType=json`;
+      const url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/new%20york/${date}/${date}?unitGroup=metric&key=${API_KEY}&contentType=json`;
 
       try {
         const response = await fetch(url);
@@ -39,9 +36,9 @@ const Weather = () => {
     fetchData();
   }, [date]);
 
-  const handleDateChange = (e) => {
-    setDate(e.target.value);
-  };
+  // const handleDateChange = (e) => {
+  //   // setDate(e.target.value);
+  // };
 
   const getWeatherIcon = (condition) => {
     switch (condition.toLowerCase()) {
@@ -62,22 +59,11 @@ const Weather = () => {
     }
   };
 
-  const minDate = "1970-01-01";
-  const maxDate = getCurrentDate();
+  // const maxDate = getCurrentDate();
 
   return (
     <div>
       <h2>Weather</h2>
-      <label>
-        Select Date:
-        <input
-          type="date"
-          value={date}
-          onChange={handleDateChange}
-          min={minDate}
-          max={maxDate}
-        />
-      </label>
       {loading && <div>Loading...</div>}
       {error && <div>Error: {error}</div>}
       {data && data.days && (
@@ -86,9 +72,9 @@ const Weather = () => {
             Conditions: {data.days[0].conditions}{" "}
             {getWeatherIcon(data.days[0].conditions)}
           </p>
-          <p>Temperature: {data.days[0].temp}°C</p>
-          <p>Max Temperature: {data.days[0].tempmax}°C</p>
-          <p>Min Temperature: {data.days[0].tempmin}°C</p>
+          <p>Temperature: {convertTempToF(data.days[0].temp)}°F</p>
+          <p>Max Temperature: {convertTempToF(data.days[0].tempmax)}°F</p>
+          <p>Min Temperature: {convertTempToF(data.days[0].tempmin)}°F</p>
         </div>
       )}
     </div>

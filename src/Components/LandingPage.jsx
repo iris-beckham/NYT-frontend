@@ -23,9 +23,11 @@ const LandingPage = () => {
           <Archive searchInputs={searchInputs} loading={loading} setLoading={setLoading}/>
           <Presidents searchInputs={searchInputs} loading={loading} setLoading={setLoading}/>
           <BabyNames searchInputs={searchInputs} loading={loading} setLoading={setLoading}/>
-          <Weather />
-          <MilkPricesChart />
-          <MTAPrices />
+          <Weather searchInputs={searchInputs}/>
+          <div className="bg-green-400">
+            <MilkPricesChart />
+            <MTAPrices />
+          </div>
         </div>
       </div>
     </div>

@@ -20,7 +20,7 @@ const Presidents = ({ searchInputs, loading, setLoading }) => {
          return (
           <>
           <h2>{modArr[0].pres_name}</h2>
-          {/* <img src={modArr[0].image} alt={modArr[0].pres_name} /> */}
+          <img src={modArr[0].image} alt={modArr[0].pres_name} />
           </>
         )
         }

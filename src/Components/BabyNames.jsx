@@ -6,8 +6,6 @@ const BabyNames = ({ searchInputs, loading, setLoading }) => {
   const[babyNames, setBabyNames] = useState([])
 
   useEffect(() => {
-    // console.log(searchInputs.year)
-    // console.log(`${URL}/api/babies/${searchInputs.year}`)
     if(searchInputs) {
         fetch(`${URL}/api/babies/${searchInputs.year}`)
         .then((res) => res.json())
@@ -23,7 +21,7 @@ const BabyNames = ({ searchInputs, loading, setLoading }) => {
 
   // console.log(babyNames)
   return (
-    <div>
+    <div className="bg-cyan-300">
       {babyNames.length > 0 ? (
         <>
           <h2>BOY: {babyNames[0].name }</h2>

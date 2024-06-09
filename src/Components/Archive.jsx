@@ -1,4 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { ExternalLink } from 'lucide-react';
+
+const API_KEY = import.meta.env.VITE_NYT_API_KEY
+
 
 const Archive = ({ searchInputs, loading, setLoading }) => {
   const [data, setData] = useState(null);
@@ -7,9 +11,10 @@ const Archive = ({ searchInputs, loading, setLoading }) => {
 
   // const formattedDate = `${searchInputs.year}/${searchInputs.month + 1}`;
   useEffect(() => {
+    // console.log(API_KEY)
     const fetchData = async () => {
-      const apiKey = "dakGsl89dvWtp72TvxtYL3CE527gCybo"; // Replace with your actual API key
-      const url = `https://api.nytimes.com/svc/archive/v1/${searchInputs.year}/${searchInputs.month}.json?api-key=${apiKey}`;
+
+      const url = `https://api.nytimes.com/svc/archive/v1/${searchInputs.year}/${searchInputs.month}.json?api-key=${API_KEY}`;
 
       try {
         setLoading(true); // Set loading state to true before fetching data
@@ -42,7 +47,7 @@ const Archive = ({ searchInputs, loading, setLoading }) => {
         {articleArray.map((article, index) => (
           <li key={index}>
             <h3>Header: {article.headline.main}</h3>
-
+            <a href={article.web_url} target="_blank"><ExternalLink size={15} className="hover:text-slate-400"/></a>
             {article.multimedia.length > 0 ? (
               <img
                 src={`https://nytimes.com/${article.multimedia[article.multimedia.length - 1].url}`}
