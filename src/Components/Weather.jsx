@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { convertTempToF } from "../Helpers/helpers";
 
-const API_KEY = import.meta.env.VITE_REACT_APP_WEATHER_API_KEY_MAIN
+const API_KEY = import.meta.env.VITE_REACT_APP_WEATHER_API_KEY_MAIN;
 
-const Weather = ({searchInputs}) => {
+const Weather = ({ searchInputs }) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   // const [date, setDate] = useState("");
-  const date = `${searchInputs.year}-${String(searchInputs.month).padStart(2, '0')}-${String(searchInputs.day).padStart(2, '0')}`;
+  const date = `${searchInputs.year}-${String(searchInputs.month).padStart(
+    2,
+    "0"
+  )}-${String(searchInputs.day).padStart(2, "0")}`;
   // Get today's date in YYYY-MM-DD format
-  
 
   useEffect(() => {
     if (!date) return;
@@ -33,7 +35,7 @@ const Weather = ({searchInputs}) => {
       }
     };
 
-    fetchData();
+    // fetchData();
   }, [date]);
 
   // const handleDateChange = (e) => {
@@ -60,7 +62,7 @@ const Weather = ({searchInputs}) => {
   };
 
   // const maxDate = getCurrentDate();
-  if(loading) return null;
+  if (loading) return null;
 
   return (
     <div>
