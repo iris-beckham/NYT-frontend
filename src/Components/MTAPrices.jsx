@@ -119,7 +119,7 @@ const TrainChart = () => {
   };
 
   return (
-    <div>
+    <div className="hover:scale-105 hover:shadow-lg hover:shadow-grey-200">
       <div style={{ height: "500px", width: "500px" }}>
         <Line data={chartData} options={options} />
       </div>

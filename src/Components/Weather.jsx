@@ -4,7 +4,7 @@ import { convertTempToF } from "../Helpers/helpers";
 const API_KEY = import.meta.env.VITE_REACT_APP_WEATHER_API_KEY_MAIN;
 
 
-const Weather = ({ searchInputs, loading}) => {
+const Weather = ({ searchInputs, loading }) => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
 
@@ -72,7 +72,7 @@ const Weather = ({ searchInputs, loading}) => {
   // if (loading) return null;
   const { year, month, day } = searchInputs;
   return (
-    <div className="weather-container">
+    <div className="weather-container hover:scale-105 hover:shadow-lg hover:shadow-grey-200">
       <h1 className="dm-serif-text-regular">Weather</h1>
       {data && data.days && (
         <div>

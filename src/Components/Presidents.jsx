@@ -14,24 +14,24 @@ const Presidents = ({ searchInputs, loading, setLoading }) => {
   }, []);
 
   const findPres = (presArr, year) => {
-    if(presArr && year) {
+    if (presArr && year) {
       const modArr = presArr.filter(p => p.term_start.split('-')[0] && year < p.term_end.split('-')[0])
-      if(modArr[0]) {
-         return (
+      if (modArr[0]) {
+        return (
           <>
-          <img src={modArr[0].image} alt={modArr[0].pres_name} />
-          <h2>{modArr[0].pres_name}</h2>
+            <img src={modArr[0].image} alt={modArr[0].pres_name} />
+            <h2>{modArr[0].pres_name}</h2>
           </>
         )
-        }
+      }
     }
-    
+
   }
 
-  if(loading) return null;
+  if (loading) return null;
 
   return (
-    <div className="pres-container dm-serif-text-regular">
+    <div className="pres-container dm-serif-text-regular hover:scale-105 hover:shadow-lg hover:shadow-grey-200">
       <div>
         <h1>President</h1>
         {findPres(presidents, searchInputs.year)}

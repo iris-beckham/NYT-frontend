@@ -92,7 +92,7 @@ const MilkPriceChart = () => {
 
   return (
     <div>
-      <div className="mr-32 " style={{ height: "500px", width: "500px" }}>
+      <div className="mr-32 hover:scale-105 hover:shadow-lg hover:shadow-grey-200" style={{ height: "500px", width: "500px" }}>
         <Bar data={chartData} options={options} />
       </div>
     </div>
