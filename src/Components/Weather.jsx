@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { convertTempToF, writeOutMonth } from "../Helpers/helpers";
+import { convertTempToF } from "../Helpers/helpers";
 
 const API_KEY = import.meta.env.VITE_REACT_APP_WEATHER_API_KEY_MAIN;
 
@@ -15,13 +15,11 @@ const Weather = ({ searchInputs, loading}) => {
   const backUpData = {
     days: [
       {
-
         conditions: "🌧️",
         temp: 13.33,
         tempmax: 15.56,
         tempmin: 10,
         feelslike: 12
-
       },
     ],
   };
@@ -50,22 +48,6 @@ const Weather = ({ searchInputs, loading}) => {
 
     fetchData();
   }, [date]);
-
-
-  // if (loading) return null;
-  const { year, month, day } = searchInputs;
-  return (
-    <div>
-      <h2>
-        On {writeOutMonth(month)} {day}, {year} the weather was
-      </h2>
-      {loading && <div>Loading...</div>}
-      {error && <div>{error}</div>}
-      {data && data.days && (
-        <div>
-          <p>Temperature: {convertTempToF(data.days[0].temp)}°F</p>
-          <p>Max Temperature: {convertTempToF(data.days[0].tempmax)}°F</p>
-          <p>Min Temperature: {convertTempToF(data.days[0].tempmin)}°F</p>
 
   const getWeatherIcon = (condition) => {
     switch (condition.includes(',') ? condition.split(',')[0].toLowerCase() : condition.toLowerCase()) {
@@ -98,7 +80,6 @@ const Weather = ({ searchInputs, loading}) => {
           <p className="dm-serif-text-regular">Max Temperature: {convertTempToF(data.days[0].tempmax)}°F</p>
           <p className="dm-serif-text-regular">Min Temperature: {convertTempToF(data.days[0].tempmin)}°F</p>
           <p className="dm-serif-text-regular">Feels Like: {convertTempToF(data.days[0].feelslike)}°F</p>
-
         </div>
       )}
     </div>
