@@ -12,19 +12,31 @@ const LandingPage = () => {
   const [searchInputs, setSearchInputs] = useState({
     year: 2023,
     month: date.getMonth(),
-    day: 1
+    day: 1,
   });
   const [loading, setLoading] = useState(true);
   return (
     <div>
       <div className="bg-red-400">
-        <Forms searchInputs={searchInputs} setSearchInputs={setSearchInputs}/>
+        <Forms searchInputs={searchInputs} setSearchInputs={setSearchInputs} />
         <div>
-          <Archive searchInputs={searchInputs} loading={loading} setLoading={setLoading}/>
-          <Presidents searchInputs={searchInputs} loading={loading} setLoading={setLoading}/>
-          <BabyNames searchInputs={searchInputs} loading={loading} setLoading={setLoading}/>
-          <Weather searchInputs={searchInputs}/>
-          <div className="bg-green-400">
+          <Archive
+            searchInputs={searchInputs}
+            loading={loading}
+            setLoading={setLoading}
+          />
+          <Presidents
+            searchInputs={searchInputs}
+            loading={loading}
+            setLoading={setLoading}
+          />
+          <BabyNames
+            searchInputs={searchInputs}
+            loading={loading}
+            setLoading={setLoading}
+          />
+          <Weather searchInputs={searchInputs} />
+          <div className="bg-slate-100">
             <MilkPricesChart />
             <MTAPrices />
           </div>

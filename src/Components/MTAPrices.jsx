@@ -21,14 +21,17 @@ ChartJS.register(
   Legend
 );
 
-const prideColors = [
-  "rgba(255, 0, 0, 1)", // red
-  "rgba(255, 165, 0, 1)", // orange
-  "rgba(255, 255, 0, 1)", // yellow
-  "rgba(0, 128, 0, 1)", // green
-  "rgba(0, 0, 255, 1)", // blue
-  "rgba(128, 0, 128, 1)", // purple
-];
+const generateGrayscaleColors = (numColors) => {
+  const colors = [];
+  const step = 255 / (numColors - 1); // Calculate the step for each color in grayscale
+  for (let i = 0; i < numColors; i++) {
+    const value = Math.round(step * i);
+    colors.push(`rgb(${value}, ${value}, ${value})`);
+  }
+  return colors;
+};
+
+const grayscaleColors = generateGrayscaleColors(3); // Generate 3 grayscale colors
 
 const TrainChart = () => {
   const [chartData, setChartData] = useState({
@@ -38,10 +41,10 @@ const TrainChart = () => {
         label: "MTA Train and Bus Fare (in dollars)",
         data: [0.3, 0.6, 1.15, 1.5, 2.25, 2.9], // y axis
         backgroundColor: "rgba(0, 0, 0, 0)", // No fill for the line area
-        borderColor: prideColors,
+        borderColor: grayscaleColors[0],
         borderWidth: 2,
-        pointBackgroundColor: prideColors,
-        pointBorderColor: prideColors,
+        pointBackgroundColor: grayscaleColors[0],
+        pointBorderColor: grayscaleColors[0],
         pointRadius: 5,
         pointHoverRadius: 7,
         fill: false, // Don't fill the area under the line
@@ -50,10 +53,22 @@ const TrainChart = () => {
         label: "NYC Ferry Price (in dollars)",
         data: [0.25, 0.5, 0.75, 1, 1.35, 4.0], // y axis
         backgroundColor: "rgba(0, 0, 0, 0)", // No fill for the line area
-        borderColor: prideColors,
+        borderColor: grayscaleColors[1],
         borderWidth: 2,
-        pointBackgroundColor: prideColors,
-        pointBorderColor: prideColors,
+        pointBackgroundColor: grayscaleColors[1],
+        pointBorderColor: grayscaleColors[1],
+        pointRadius: 5,
+        pointHoverRadius: 7,
+        fill: false, // Don't fill the area under the line
+      },
+      {
+        label: "Gas Price (in dollars)",
+        data: [0.36, 1.19, 1.16, 1.56, 2.84, 2.24], // y axis
+        backgroundColor: "rgba(0, 0, 0, 0)", // No fill for the line area
+        borderColor: grayscaleColors[2],
+        borderWidth: 2,
+        pointBackgroundColor: grayscaleColors[2],
+        pointBorderColor: grayscaleColors[2],
         pointRadius: 5,
         pointHoverRadius: 7,
         fill: false, // Don't fill the area under the line
@@ -67,7 +82,10 @@ const TrainChart = () => {
       legend: {
         position: "top",
       },
-      title: { display: true, text: "MTA Fare Prices Over the Past 50 Years" },
+      title: {
+        display: true,
+        text: "Train/Bus, Ferry and Gas Prices Over 50 Years",
+      },
     },
     scales: {
       y: {
@@ -95,9 +113,3 @@ const TrainChart = () => {
 };
 
 export default TrainChart;
-
-
-
-
-
-
