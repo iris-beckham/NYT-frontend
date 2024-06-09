@@ -17,7 +17,7 @@ const LandingPage = () => {
   const [loading, setLoading] = useState(true);
   return (
     <div>
-      <div className="bg-red-400">
+      <div >
         <Forms searchInputs={searchInputs} setSearchInputs={setSearchInputs} />
         <div>
           <Archive
@@ -25,17 +25,19 @@ const LandingPage = () => {
             loading={loading}
             setLoading={setLoading}
           />
+          <div className="widget-container">
           <Presidents
             searchInputs={searchInputs}
             loading={loading}
             setLoading={setLoading}
-          />
+            />
           <BabyNames
             searchInputs={searchInputs}
             loading={loading}
             setLoading={setLoading}
-          />
+            />
           <Weather searchInputs={searchInputs} />
+            </div>
           <div className="bg-slate-100">
             <MilkPricesChart />
             <MTAPrices />
