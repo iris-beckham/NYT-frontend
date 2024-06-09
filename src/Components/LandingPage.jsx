@@ -32,16 +32,15 @@ const LandingPage = ({ searchInputs }) => {
             loading={loading}
             setLoading={setLoading}
             />
-          <Weather searchInputs={searchInputs} />
-
-          <div className="bg-slate-100 flex justify-around">
-            <div className="flex flex-row">
-              <MilkPricesChart />
-
-              <MTAPrices />
+          <Weather searchInputs={searchInputs} loading={loading}/>
             </div>
+          <div className="bg-slate-100 flex justify-around">
+          <div className="flex flex-row space-x-24">
+            <MilkPricesChart />
 
+            <MTAPrices />
           </div>
+        </div>
         </div>
     </div>
  </div>
