@@ -33,7 +33,7 @@ const BabyNames = ({ searchInputs, loading, setLoading }) => {
           </div>
         </>
       ) : (
-        null
+        <h2>NO POPULAR NAMES RECORDED</h2>
       )}
     </div>
   )
