@@ -41,10 +41,6 @@ const Archive = ({ searchInputs, loading, setLoading }) => {
   const { day, month, year } = searchInputs;
   return (
     <div className="section">
-      <div className="border-b-2 border-black">
-        <h1 className="big-text">{`${writeOutMonth(month)} ${day}, ${year}`}</h1>
-      </div>
-
 
       <ul className="m-3 grid articles md:grid-cols-3 xl:grid-cols-6 ">
         {articleArray.map((article, index) => (
