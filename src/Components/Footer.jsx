@@ -8,7 +8,7 @@ const Footer = () => {
         <div className="flex justify-between">
           <div>
             <Link to="/about-us" className="text-xl font-bold mb-2 text-white" style={{ textDecoration: 'none' }}>
-              About
+              About The Developers
             </Link>
             <p className="text-gray-400">
               Nostalgia News is your source for the latest in vintage news and historical articles.

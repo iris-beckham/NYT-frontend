@@ -12,13 +12,16 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  background-color: #F2F2F2;
+}
+
 /* Header: DM Serif */
 .dm-serif-text-regular {
   font-family: "DM Serif Text", serif;
   font-weight: 400;
   font-style: normal;
-  font-size: 20px;
-  line-height: 30px;
+  line-height: 20px;
 }
 
 .dm-serif-text-regular-italic {
@@ -36,10 +39,9 @@
   font-weight: 400;
   font-style: normal;
   text-align: justify;
+  font-size: 15px;
+  line-height: 20px;
   margin: 8px;
-
-  /* text-justify: newspaper; */
-  /* text-orientation: sideways; */
 }
 
 

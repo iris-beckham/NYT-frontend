@@ -1,24 +1,16 @@
 import { useState } from "react";
 import Archive from "./Archive";
 import Presidents from "./Presidents";
-import Forms from "./Forms";
 import BabyNames from "./BabyNames";
 import Weather from "./Weather";
 import MilkPricesChart from "./MilkPricesChart";
 import MTAPrices from "./MTAPrices";
 
-const LandingPage = () => {
-  const date = new Date();
-  const [searchInputs, setSearchInputs] = useState({
-    year: 2023,
-    month: date.getMonth(),
-    day: 1,
-  });
+const LandingPage = ({ searchInputs }) => {
+
   const [loading, setLoading] = useState(true);
   return (
-    <div>
-      <div >
-        <Forms searchInputs={searchInputs} setSearchInputs={setSearchInputs} />
+    <div className="mt-24">
         <div>
           <Archive
             searchInputs={searchInputs}
@@ -43,7 +35,6 @@ const LandingPage = () => {
             <MTAPrices />
           </div>
         </div>
-      </div>
     </div>
   );
 };
