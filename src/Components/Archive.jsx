@@ -44,7 +44,7 @@ const Archive = ({ searchInputs, loading, setLoading }) => {
 
       <ul className="m-3 grid articles md:grid-cols-3 xl:grid-cols-6 ">
         {articleArray.map((article, index) => (
-          <li className="child p-50% rounded-sm hover:scale-105 transition-transform duration-300" key={index}>
+          <li className="child p-50% rounded-sm hover:scale-105 transition-transform duration-300 hover:border-none  hover:shadow-lg hover:shadow-grey-200" key={index}>
             <div className="px-5">
               <div className="flex justify-center">
                 <h3 className="dm-serif-text-regular text-center pt-3 px-1"> {article.headline.main}</h3>
