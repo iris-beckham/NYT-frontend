@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { ExternalLink } from 'lucide-react';
+import { writeOutMonth } from "../Helpers/helpers";
 
 const API_KEY = import.meta.env.VITE_NYT_API_KEY
 
 
 const Archive = ({ searchInputs, loading, setLoading }) => {
   const [data, setData] = useState(null);
-  
+
   const [error, setError] = useState(null);
 
   // const formattedDate = `${searchInputs.year}/${searchInputs.month + 1}`;
@@ -38,23 +39,25 @@ const Archive = ({ searchInputs, loading, setLoading }) => {
   if (error) return <div>Error: {error}</div>;
 
   const articleArray = data.response.docs.slice(0, 6);
-
+  const { day, month, year } = searchInputs;
   return (
     <div className="bg-yellow-500">
-      <h1>New York Times Archive</h1>
+      <h1>{`${writeOutMonth(month)} ${day}, ${year}`}</h1>
 
-      <ul>
+      <ul className="grid grid-cols-3">
         {articleArray.map((article, index) => (
-          <li key={index}>
-            <h3>Header: {article.headline.main}</h3>
-            <a href={article.web_url} target="_blank"><ExternalLink size={15} className="hover:text-slate-400"/></a>
+          <li className="bg-white m-5" key={index}>
+            <div className="flex justify-center">
+              <h3 className="dm-serif-text-regular"> {article.headline.main}</h3>
+              <a href={article.web_url} target="_blank"><ExternalLink size={15} className="hover:text-slate-400" /></a>
+            </div>
             {article.multimedia.length > 0 ? (
               <img
                 src={`https://nytimes.com/${article.multimedia[article.multimedia.length - 1].url}`}
                 alt="article-image"
               />
             ) : (
-              <p>Snippet: {article.snippet ? article.snippet.substring(0, 100) + '...' : article.abstract.substring(0, 100) + '...' } </p>
+              <p className="noto-sans-sogdian-regular"> {article.snippet ? article.snippet.substring(0, 100) + '...' : article.abstract.substring(0, 100) + '...'} </p>
             )}
           </li>
         ))}
