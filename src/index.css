@@ -12,6 +12,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  background-color: #F2F2F2;
+}
+
 /* Header: DM Serif */
 .dm-serif-text-regular {
   font-family: "DM Serif Text", serif;
