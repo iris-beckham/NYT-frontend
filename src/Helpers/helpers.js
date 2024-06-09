@@ -26,7 +26,7 @@ export const formatDate = (dateString) => {
 
 
 export const convertTempToF = (temp) => {
-  return Math.floor((9/5 * temp) -32)
+  return Math.floor((9 / 5 * temp) + 32)
 }
 
 export const getNYTKey = () => {
