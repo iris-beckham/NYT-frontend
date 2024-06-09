@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { writeOutMonth } from "../Helpers/helpers";
-import Skeleton from "react-loading-skeleton";
-import { Box, ExternalLink } from 'lucide-react';
+// import Skeleton from "react-loading-skeleton";
+import { Box, ExternalLink } from "lucide-react";
 
-const API_KEY = import.meta.env.VITE_NYT_API_KEY
-
+const API_KEY = import.meta.env.VITE_NYT_API_KEY;
 
 const Archive = ({ searchInputs, loading, setLoading }) => {
   const [data, setData] = useState(null);
@@ -15,7 +14,6 @@ const Archive = ({ searchInputs, loading, setLoading }) => {
   useEffect(() => {
     // console.log(API_KEY)
     const fetchData = async () => {
-
       const url = `https://api.nytimes.com/svc/archive/v1/${searchInputs.year}/${searchInputs.month}.json?api-key=${API_KEY}`;
 
       try {
@@ -75,27 +73,6 @@ const Archive = ({ searchInputs, loading, setLoading }) => {
         ))}
       </ul>
 
-      {/* <ul className="grid  md:grid-cols-3 xl:grid-cols-6 ">
-        {articleArray.map((article, index) => (
-          <li className="card m-5 p-50% rounded-sm hover:scale-105 transition-transform duration-300" key={index}>
-            <div className="flex justify-center">
-              <h3 className="dm-serif-text-regular text-center pt-3 px-1"> {article.headline.main}</h3>
-              <a href={article.web_url} target="_blank"><ExternalLink size={15} className="hover:text-slate-400" /></a>
-            </div>
-            <hr className="border-black my-3" />
-            {article.multimedia.length > 0 ? (
-              <div className="flex justify-center">
-                <img className="archive-image px-2"
-                  src={`https://nytimes.com/${article.multimedia[article.multimedia.length - 1].url}`}
-                  alt="article-image"
-                />
-              </div>
-            ) : (
-              <p className="noto-sans-sogdian-regular"> {article.snippet ? article.snippet.substring(0, 100) + '...' : article.abstract.substring(0, 100) + '...'} </p>
-            )}
-          </li>
-        ))}
-      </ul> */}
     </div>
   );
 };
