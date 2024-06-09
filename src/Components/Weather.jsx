@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { convertTempToF } from "../Helpers/helpers";
+import { convertTempToF, writeOutMonth } from "../Helpers/helpers";
 
 const API_KEY = import.meta.env.VITE_REACT_APP_WEATHER_API_KEY_MAIN;
 
@@ -7,12 +7,22 @@ const Weather = ({ searchInputs }) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  // const [date, setDate] = useState("");
+
   const date = `${searchInputs.year}-${String(searchInputs.month).padStart(
     2,
     "0"
   )}-${String(searchInputs.day).padStart(2, "0")}`;
-  // Get today's date in YYYY-MM-DD format
+
+  const backUpData = {
+    days: [
+      {
+        conditions: "Rain",
+        temp: 13.33,
+        tempmax: 15.56,
+        tempmin: 10,
+      },
+    ],
+  };
 
   useEffect(() => {
     if (!date) return;
@@ -24,57 +34,32 @@ const Weather = ({ searchInputs }) => {
       try {
         const response = await fetch(url);
         if (!response.ok) {
-          throw new Error(`Error: ${response.status}`);
+          throw new Error("");
         }
         const result = await response.json();
         setData(result);
       } catch (err) {
         setError(err.message);
+        setData(backUpData);
       } finally {
         setLoading(false);
       }
     };
 
-    // fetchData();
+    fetchData();
   }, [date]);
 
-  // const handleDateChange = (e) => {
-  //   // setDate(e.target.value);
-  // };
-
-  const getWeatherIcon = (condition) => {
-    switch (condition.toLowerCase()) {
-      case "partially cloudy":
-        return "⛅️";
-      case "raining":
-        return "🌧️";
-      case "snowing":
-        return "❄️";
-      case "sunny":
-        return "☀️";
-      case "cloudy":
-        return "☁️";
-      case "thunderstorm":
-        return "⛈️";
-      default:
-        return "🌡️"; // Default weather icon
-    }
-  };
-
-  // const maxDate = getCurrentDate();
-  if (loading) return null;
-
+  // if (loading) return null;
+  const { year, month, day } = searchInputs;
   return (
     <div>
-      <h2>Weather</h2>
+      <h2>
+        On {writeOutMonth(month)} {day}, {year} the weather was
+      </h2>
       {loading && <div>Loading...</div>}
-      {error && <div>Error: {error}</div>}
+      {error && <div>{error}</div>}
       {data && data.days && (
         <div>
-          <p>
-            Conditions: {data.days[0].conditions}{" "}
-            {getWeatherIcon(data.days[0].conditions)}
-          </p>
           <p>Temperature: {convertTempToF(data.days[0].temp)}°F</p>
           <p>Max Temperature: {convertTempToF(data.days[0].tempmax)}°F</p>
           <p>Min Temperature: {convertTempToF(data.days[0].tempmin)}°F</p>

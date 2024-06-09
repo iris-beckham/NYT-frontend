@@ -17,7 +17,7 @@ const LandingPage = () => {
   const [loading, setLoading] = useState(true);
   return (
     <div>
-      <div className="bg-red-400">
+      <div className="bg-red-400 mt-16">
         <Forms searchInputs={searchInputs} setSearchInputs={setSearchInputs} />
         <div>
           <Archive
@@ -36,9 +36,12 @@ const LandingPage = () => {
             setLoading={setLoading}
           />
           <Weather searchInputs={searchInputs} />
-          <div className="bg-slate-100">
-            <MilkPricesChart />
-            <MTAPrices />
+          <div className="bg-slate-100 flex justify-around">
+            <div className="flex flex-row">
+              <MilkPricesChart />
+
+              <MTAPrices />
+            </div>
           </div>
         </div>
       </div>
