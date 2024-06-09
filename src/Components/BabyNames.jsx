@@ -23,11 +23,14 @@ const BabyNames = ({ searchInputs, loading, setLoading }) => {
 
   if(loading) return null;
   return (
-    <div className="bg-cyan-300">
+    <div className="baby-container dm-serif-text-regular">
       {babyNames.length > 0 ? (
         <>
-          <h2>BOY: {babyNames[0].name }</h2>
-          <h2>GIRL: {babyNames[1].name }</h2>
+          <h1>Popular Names</h1>
+          <div className="names">
+            <h2 className="boy">{babyNames[0].name }</h2>
+            <h2 className="girl">{babyNames[1].name }</h2>
+          </div>
         </>
       ) : (
         null

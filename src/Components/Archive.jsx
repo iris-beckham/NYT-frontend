@@ -40,39 +40,35 @@ const Archive = ({ searchInputs, loading, setLoading }) => {
   const articleArray = data.response.docs.slice(0, 6);
   const { day, month, year } = searchInputs;
   return (
-    <div className="bg-yellow-500">
-      <h1>{`${writeOutMonth(month)} ${day}, ${year}`}</h1>
+    <div className="section">
 
-      <ul className="grid grid-cols-3">
+      <ul className="m-3 grid articles md:grid-cols-3 xl:grid-cols-6 ">
         {articleArray.map((article, index) => (
-          <li className="bg-white m-5" key={index}>
-            <div className="flex justify-center">
-              <h3 className="dm-serif-text-regular">
-                {" "}
-                {article.headline.main}
-              </h3>
-              <a href={article.web_url} target="_blank">
-                <ExternalLink size={15} className="hover:text-slate-400" />
-              </a>
+          <li className="child p-50% rounded-sm hover:scale-105 transition-transform duration-300" key={index}>
+            <div className="px-5">
+              <div className="flex justify-center">
+                <h3 className="dm-serif-text-regular text-center pt-3 px-1"> {article.headline.main}</h3>
+                <a href={article.web_url} target="_blank"><ExternalLink size={15} className="hover:text-slate-400" /></a>
+              </div>
+              <div className="flex justify-center">
+                <hr className="border-black my-3 w-1/2" />
+              </div>
+
+              {article.multimedia.length > 0 ? (
+                <div className="flex justify-center">
+                  <img className="archive-image px-2 mb-1"
+                    src={`https://nytimes.com/${article.multimedia[article.multimedia.length - 1].url}`}
+                    alt="article-image"
+                  />
+                </div>
+              ) : (
+                <p className="noto-sans-sogdian-regular"> {article.snippet ? article.snippet.substring(0, 100) + '...' : article.abstract.substring(0, 100) + '...'} </p>
+              )}
             </div>
-            {article.multimedia.length > 0 ? (
-              <img
-                src={`https://nytimes.com/${
-                  article.multimedia[article.multimedia.length - 1].url
-                }`}
-                alt="article-image"
-              />
-            ) : (
-              <p className="noto-sans-sogdian-regular">
-                {" "}
-                {article.snippet
-                  ? article.snippet.substring(0, 100) + "..."
-                  : article.abstract.substring(0, 100) + "..."}{" "}
-              </p>
-            )}
           </li>
         ))}
       </ul>
+
     </div>
   );
 };
