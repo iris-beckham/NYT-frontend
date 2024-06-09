@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { ExternalLink } from 'lucide-react';
 import { writeOutMonth } from "../Helpers/helpers";
+import Skeleton from "react-loading-skeleton";
+import { Box, ExternalLink } from 'lucide-react';
 
 const API_KEY = import.meta.env.VITE_NYT_API_KEY
 
